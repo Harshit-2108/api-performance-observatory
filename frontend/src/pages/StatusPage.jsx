@@ -11,6 +11,7 @@ import {
   Database,
   ArrowLeft
 } from 'lucide-react';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const StatusPage = () => {
   const [statusData, setStatusData] = useState(null);
@@ -21,7 +22,7 @@ const StatusPage = () => {
     try {
       setLoading(true);
       // Directly hit the public endpoint (bypasses auth headers)
-      const res = await axios.get('http://localhost:5000/api/public/status');
+      const res = await axios.get(`${API_URL}/api/public/status`);
       if (res.data.success) {
         setStatusData(res.data);
       }
