@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: api-performance-observatory-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+        description: MongoDB Atlas connection string uri
+      - key: JWT_SECRET
+        sync: false
+        description: Token hashing key passphrase
+      - key: FRONTEND_URL
+        sync: false
+        description: URL of your deployed Vercel frontend client
+      - key: GEMINI_API_KEY
+        sync: false
+        description: Optional Gemini key for automated root cause diagnostics
