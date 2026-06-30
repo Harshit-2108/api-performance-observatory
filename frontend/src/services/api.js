@@ -5,7 +5,7 @@ let refreshSubscribers = [];
 let isRefreshing = false;
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
   withCredentials: true, // Crucial: enables sending/receiving HTTP-Only cookies (Refresh Token)
   headers: {
     'Content-Type': 'application/json'
@@ -72,7 +72,13 @@ api.interceptors.response.use(
 
       try {
         // Fetch new access token using HTTP-only Refresh Token cookie
-        const res = await axios.post('/api/auth/refresh', {}, { withCredentials: true });
+        const res = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/auth/refresh`,
+  {},
+  {
+    withCredentials: true
+  }
+);
         
         if (res.data.success) {
           const newToken = res.data.accessToken;
